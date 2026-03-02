@@ -90,7 +90,7 @@ export default function Services() {
                 />
 
                 {/* Ghost number */}
-                <div className="absolute top-6 right-6 font-display text-[96px] leading-none text-white/[0.4] select-none pointer-events-none">
+                <div className="absolute top-6 right-6 font-display text-[96px] leading-none text-white/[0.45] select-none pointer-events-none">
                   {service.num}
                 </div>
 
