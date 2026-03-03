@@ -64,9 +64,9 @@ export default function About() {
             <div className="relative aspect-[3/4] overflow-hidden bg-brand-card">
               <img
                 src="/jeff.jpg"
-                alt="Alex Mercer — Director & Producer"
-                className="absolute inset-0 w-full h-full object-cover "
-                style={{ mixBlendMode: "luminosity", opacity: 0.65 }}
+                alt="Jeff Aquino — Director & Producer"
+                className="absolute inset-0 w-full h-full object-cover grayscale"
+                style={{ mixBlendMode: "luminosity", opacity: 0.65, transform: "scale(1.1)", transformOrigin: "center 35%" }}
               />
               {/* Coloured rim overlay */}
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_10%,rgba(58,124,165,0.10)_0%,transparent_1%)]" />
@@ -74,7 +74,7 @@ export default function About() {
             </div>
 
             {/* Experience badge */}
-            <div className="absolute bottom-6 left-6 bg-brand-card/95 backdrop-blur-md border border-white/[0.08] px-5 py-4">
+            <div className="absolute bottom-0 left-6 bg-brand-card/95 backdrop-blur-md border border-white/[0.08] px-5 py-4">
               <div className="font-display text-brand-amber text-5xl leading-none">
                 12+
               </div>
