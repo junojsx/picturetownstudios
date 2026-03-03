@@ -1,10 +1,10 @@
 import { Play, ArrowRight } from "lucide-react";
 
 const stats = [
-  { value: "50+", label: "Films &\u00A0Commercials" },
-  { value: "8", label: "Industry Awards" },
-  { value: "15", label: "Countries Filmed" },
-  { value: "12+", label: "Years Experience" },
+  { value: "10+", label: "Films &\u00A0Commercials" },
+  { value: "1", label: "Industry Awards" },
+  { value: "2", label: "Countries Filmed" },
+  { value: "5+", label: "Years Experience" },
 ];
 
 // Viewfinder bracket positions: [position classes, border classes]

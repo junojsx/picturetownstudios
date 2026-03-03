@@ -41,10 +41,10 @@ const skills = [
 ];
 
 const statItems = [
-  ["50+", "Projects"],
-  ["8", "Awards"],
-  ["15", "Countries"],
-  ["12+", "Years"],
+  ["10+", "Projects"],
+  ["1", "Awards"],
+  ["2", "Countries"],
+  ["5+", "Years"],
 ];
 
 export default function About() {
@@ -66,7 +66,12 @@ export default function About() {
                 src="/jeff.jpg"
                 alt="Jeff Aquino — Director & Producer"
                 className="absolute inset-0 w-full h-full object-cover grayscale"
-                style={{ mixBlendMode: "luminosity", opacity: 0.65, transform: "scale(1.1)", transformOrigin: "center 35%" }}
+                style={{
+                  mixBlendMode: "luminosity",
+                  opacity: 0.65,
+                  transform: "scale(1.1)",
+                  transformOrigin: "center 35%",
+                }}
               />
               {/* Coloured rim overlay */}
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_10%,rgba(58,124,165,0.10)_0%,transparent_1%)]" />
@@ -76,7 +81,7 @@ export default function About() {
             {/* Experience badge */}
             <div className="absolute bottom-0 left-6 bg-brand-card/95 backdrop-blur-md border border-white/[0.08] px-5 py-4">
               <div className="font-display text-brand-amber text-5xl leading-none">
-                12+
+                5+
               </div>
               <div className="font-body text-[9px] tracking-[0.3em] uppercase text-brand-silver/55 mt-1">
                 Years Experience
@@ -126,7 +131,7 @@ export default function About() {
                   size={13}
                   className="text-brand-blue group-hover:text-brand-amber transition-colors"
                 />
-                hello@picturetown.studio
+                picturetownstudios@gmail.com
               </a>
               <div className="flex items-center gap-2 text-brand-silver/55 text-xs font-body">
                 <MapPin size={13} className="text-brand-blue" />
