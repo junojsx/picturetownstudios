@@ -44,12 +44,36 @@ export default function Contact() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState(null);
 
   const set = (key) => (e) => setForm((p) => ({ ...p, [key]: e.target.value }));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setError(null);
+    setSending(true);
+    try {
+      const body = new URLSearchParams({
+        "form-name": "contact",
+        ...form,
+      }).toString();
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body,
+      });
+      if (!res.ok) {
+        setError("Something went wrong. Please try again.");
+        return;
+      }
+      setSubmitted(true);
+      setForm({ name: "", email: "", projectType: "", budget: "", message: "" });
+    } catch (err) {
+      setError("Network error. Please check your connection and try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -84,7 +108,10 @@ export default function Contact() {
                   and get back to you within 24 – 48 hours.
                 </p>
                 <button
-                  onClick={() => setSubmitted(false)}
+                  onClick={() => {
+                    setSubmitted(false);
+                    setError(null);
+                  }}
                   className="flex items-center gap-2 font-body text-[10px] tracking-widest uppercase text-brand-amber hover:text-white transition-colors mt-2"
                 >
                   Send another message
@@ -93,6 +120,11 @@ export default function Contact() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
+                {error && (
+                  <div className="bg-red-500/10 border border-red-500/30 text-red-300 font-body text-sm px-4 py-3">
+                    {error}
+                  </div>
+                )}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
                     <label className="block font-body text-[9px] tracking-widest uppercase text-brand-silver/60 mb-2">
@@ -100,6 +132,7 @@ export default function Contact() {
                     </label>
                     <input
                       type="text"
+                      name="name"
                       required
                       value={form.name}
                       onChange={set("name")}
@@ -113,6 +146,7 @@ export default function Contact() {
                     </label>
                     <input
                       type="email"
+                      name="email"
                       required
                       value={form.email}
                       onChange={set("email")}
@@ -128,6 +162,7 @@ export default function Contact() {
                       Project Type
                     </label>
                     <select
+                      name="projectType"
                       value={form.projectType}
                       onChange={set("projectType")}
                       className={`${inputBase} appearance-none`}
@@ -145,6 +180,7 @@ export default function Contact() {
                       Budget Range
                     </label>
                     <select
+                      name="budget"
                       value={form.budget}
                       onChange={set("budget")}
                       className={`${inputBase} appearance-none`}
@@ -164,6 +200,7 @@ export default function Contact() {
                     Message
                   </label>
                   <textarea
+                    name="message"
                     rows={5}
                     required
                     value={form.message}
@@ -175,12 +212,13 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  className="group flex items-center gap-3 bg-brand-amber hover:bg-amber-500 text-brand-black font-body font-semibold text-sm px-8 py-4 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_32px_rgba(245,158,11,0.28)]"
+                  disabled={sending}
+                  className="group flex items-center gap-3 bg-brand-amber hover:bg-amber-500 text-brand-black font-body font-semibold text-sm px-8 py-4 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_32px_rgba(245,158,11,0.28)] disabled:opacity-60 disabled:pointer-events-none disabled:hover:scale-100"
                 >
-                  Send Message
+                  {sending ? "Sending…" : "Send Message"}
                   <Send
                     size={13}
-                    className="group-hover:translate-x-0.5 transition-transform"
+                    className={`group-hover:translate-x-0.5 transition-transform ${sending ? "animate-pulse" : ""}`}
                   />
                 </button>
               </form>

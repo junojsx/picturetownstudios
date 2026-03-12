@@ -16,6 +16,15 @@
     />
   </head>
   <body>
+    <!-- Hidden form for Netlify Forms detection (same name/fields as React form) -->
+    <form name="contact" data-netlify="true" data-netlify-honeypot="bot" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="projectType" />
+      <input type="text" name="budget" />
+      <input type="text" name="message" />
+      <input type="text" name="bot" />
+    </form>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

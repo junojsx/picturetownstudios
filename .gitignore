@@ -1,0 +1,16 @@
+node_modules
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local environment variables
+.env
+.env.*
+!.env.example
+
+# Build output
+dist
+
+# OS/editor junk
+.DS_Store
+.vscode
