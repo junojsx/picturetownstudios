@@ -60,7 +60,7 @@ export default function Hero() {
         <div className="max-w-5xl">
           {/* Eyebrow */}
           <p
-            className="font-body text-brand-silver/60 text-[11px] tracking-[0.55em] uppercase mb-5"
+            className="font-body text-brand-silver/60 text-sm md:text-base tracking-[0.55em] uppercase mb-6"
             style={{ animation: "fadeUp 0.8s ease 0.15s both" }}
           >
             Award-Winning Director
@@ -71,7 +71,7 @@ export default function Hero() {
             <span
               className="font-display text-white block"
               style={{
-                fontSize: "clamp(32px, 14vw, 120px)",
+                fontSize: "clamp(44px, 15vw, 152px)",
                 animation: "fadeUp 0.8s ease 0.35s both",
               }}
             >
@@ -80,10 +80,10 @@ export default function Hero() {
             <span
               className="font-display text-brand-amber block"
               style={{
-                fontSize: "clamp(32px, 14vw, 120px)",
+                fontSize: "clamp(44px, 15vw, 152px)",
                 animation: "fadeUp 0.8s ease 0.5s both",
                 textShadow:
-                  "0 0 40px rgba(245,158,11,0.4), 0 0 90px rgba(245,158,11,0.15)",
+                  "0 0 48px rgba(245,158,11,0.5), 0 0 110px rgba(245,158,11,0.2)",
               }}
             >
               Storytelling
@@ -92,7 +92,7 @@ export default function Hero() {
 
           {/* Subtitle */}
           <p
-            className="font-serif text-brand-silver/60 text-lg md:text-xl italic mb-10 max-w-md leading-relaxed"
+            className="font-serif text-brand-silver/60 text-xl md:text-2xl italic mb-12 max-w-xl leading-relaxed"
             style={{ animation: "fadeUp 0.8s ease 0.65s both" }}
           >
             Creating high-impact visual experiences and narrative-driven films
@@ -104,13 +104,13 @@ export default function Hero() {
             className="flex flex-wrap items-center gap-6 md:gap-10"
             style={{ animation: "fadeUp 0.8s ease 0.8s both" }}
           >
-            <button className="group flex items-center gap-3 bg-brand-amber hover:bg-amber-500 text-brand-black font-body font-semibold text-sm px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_32px_rgba(245,158,11,0.35)]">
+            <button className="group flex items-center gap-3 bg-brand-amber hover:bg-amber-500 text-brand-black font-body font-semibold text-base px-9 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_32px_rgba(245,158,11,0.35)]">
               <Play size={14} className="fill-current" />
               Watch Reel
             </button>
             <a
               href="#projects"
-              className="group flex items-center gap-2 font-body text-brand-silver/65 hover:text-white text-[11px] tracking-[0.25em] uppercase transition-colors duration-300"
+              className="group flex items-center gap-2 font-body text-brand-silver/65 hover:text-white text-sm tracking-[0.25em] uppercase transition-colors duration-300"
             >
               View Works
               <ArrowRight

@@ -35,31 +35,31 @@ export default function Navbar() {
             : 'bg-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-8 md:px-10 h-20 flex items-center justify-between">
           {/* Logo + wordmark */}
-          <a href="#home" className="flex items-center gap-3 group">
+          <a href="#home" className="flex items-center gap-4 group">
             <img
               src="/picturetown-mark.png"
               alt="PictureTown Studios logo"
-              className="h-10 w-10 rounded-full object-contain"
+              className="h-16 w-16 rounded-full object-contain"
             />
             <div className="flex flex-col leading-none">
-              <span className="font-display text-white text-[11px] sm:text-xs md:text-sm tracking-[0.4em] uppercase">
+              <span className="font-display text-white text-base md:text-lg tracking-[0.4em] uppercase">
                 PICTURETOWN
               </span>
-              <span className="font-display text-white text-[11px] sm:text-xs md:text-sm tracking-[0.4em] uppercase">
+              <span className="font-display text-white text-base md:text-lg tracking-[0.4em] uppercase">
                 STUDIOS
               </span>
             </div>
           </a>
 
           {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-10">
             {navLinks.map(link => (
               <a
                 key={link.href}
                 href={link.href}
-                className="font-body text-[11px] tracking-[0.28em] uppercase text-brand-silver/60 hover:text-white transition-colors duration-300"
+                className="font-body text-sm tracking-[0.28em] uppercase text-brand-silver/60 hover:text-white transition-colors duration-300"
               >
                 {link.label}
               </a>
@@ -70,7 +70,7 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
             <a
               href="#contact"
-              className="hidden md:inline-flex font-body text-[11px] tracking-widest uppercase font-semibold bg-brand-amber hover:bg-amber-500 text-brand-black px-5 py-2 transition-all duration-300 hover:scale-105"
+              className="hidden md:inline-flex font-body text-sm tracking-widest uppercase font-semibold bg-brand-amber hover:bg-amber-500 text-brand-black px-6 py-2.5 transition-all duration-300 hover:scale-105"
             >
               Hire Me
             </a>
