@@ -80,7 +80,7 @@ export default function Navbar() {
 
       {/* Mobile drawer */}
       {menuOpen && (
-        <div className="fixed inset-0 z-30 bg-brand-black/98 flex flex-col px-8 pt-24 pb-10 md:hidden">
+        <div className="fixed inset-0 z-30 bg-black flex flex-col px-8 pt-24 pb-10 md:hidden">
           <nav className="flex flex-col gap-8">
             {navLinks.map(link => (
               <a

@@ -17,10 +17,7 @@ const brackets = [
 
 export default function Hero() {
   return (
-    <section
-      id="home"
-      className="relative min-h-screen flex flex-col overflow-hidden"
-    >
+    <section id="home" className="relative min-h-screen flex flex-col">
       {/* ── Background ── */}
       <div className="absolute inset-0 bg-brand-black">
         {/* Warm studio key-light from left */}
@@ -74,7 +71,7 @@ export default function Hero() {
             <span
               className="font-display text-white block"
               style={{
-                fontSize: "clamp(72px, 13vw, 158px)",
+                fontSize: "clamp(32px, 14vw, 120px)",
                 animation: "fadeUp 0.8s ease 0.35s both",
               }}
             >
@@ -83,7 +80,7 @@ export default function Hero() {
             <span
               className="font-display text-brand-amber block"
               style={{
-                fontSize: "clamp(72px, 13vw, 158px)",
+                fontSize: "clamp(32px, 14vw, 120px)",
                 animation: "fadeUp 0.8s ease 0.5s both",
                 textShadow:
                   "0 0 40px rgba(245,158,11,0.4), 0 0 90px rgba(245,158,11,0.15)",
