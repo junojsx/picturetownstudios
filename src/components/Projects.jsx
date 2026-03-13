@@ -322,7 +322,7 @@ function ProjectModal({ project, onClose }) {
                 {project.title}
               </h2>
               <p className="font-body text-brand-silver/60 text-xs mt-2">
-                Directed &amp; Produced by Alex Mercer &middot; {project.year}{" "}
+                Directed &amp; Produced by Jeff Aquino &middot; {project.year}{" "}
                 &middot; {project.category}
               </p>
             </div>

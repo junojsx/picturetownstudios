@@ -308,17 +308,17 @@ export default function Contact() {
       <div className="border-t border-white/[0.05] px-6 md:px-10 py-5">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
-            <div className="w-6 h-6 bg-brand-amber flex items-center justify-center">
-              <span className="font-display text-brand-black text-sm leading-none select-none">
-                PT
-              </span>
-            </div>
+            <img
+              src="/picturetown-mark.png"
+              alt="PictureTown Studios logo"
+              className="w-6 h-6 rounded-full object-contain"
+            />
             <span className="font-body text-brand-silver/55 text-xs">
               © 2026 PictureTown Studios. All rights reserved.
             </span>
           </div>
           <p className="font-body text-brand-silver/55 text-xs">
-            Alex Mercer — Director &amp; Writer — Los Angeles
+           Jeff Aquino — Director &amp; Writer — Los Angeles
           </p>
         </div>
       </div>

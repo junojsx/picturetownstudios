@@ -36,14 +36,21 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
-          {/* Logo */}
+          {/* Logo + wordmark */}
           <a href="#home" className="flex items-center gap-3 group">
-            <div className="w-8 h-8 bg-brand-amber flex items-center justify-center flex-shrink-0">
-              <span className="font-display text-brand-black text-lg leading-none select-none">PT</span>
+            <img
+              src="/picturetown-mark.png"
+              alt="PictureTown Studios logo"
+              className="h-10 w-10 rounded-full object-contain"
+            />
+            <div className="flex flex-col leading-none">
+              <span className="font-display text-white text-[11px] sm:text-xs md:text-sm tracking-[0.4em] uppercase">
+                PICTURETOWN
+              </span>
+              <span className="font-display text-white text-[11px] sm:text-xs md:text-sm tracking-[0.4em] uppercase">
+                STUDIOS
+              </span>
             </div>
-            <span className="font-display text-white tracking-[0.18em] text-sm hidden sm:block">
-              PICTURETOWN
-            </span>
           </a>
 
           {/* Desktop links */}
