@@ -1,21 +1,17 @@
-import Navbar   from './components/Navbar'
-import Hero     from './components/Hero'
-import Projects from './components/Projects'
-import Services from './components/Services'
-import About    from './components/About'
-import Contact  from './components/Contact'
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import YouthCinemaProject from "./pages/YouthCinemaProject";
 
 export default function App() {
   return (
     <div className="film-grain">
-      <Navbar />
-      <main>
-        <Hero />
-        <Projects />
-        <Services />
-        <About />
-        <Contact />
-      </main>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/the-youth-cinema-project"
+          element={<YouthCinemaProject />}
+        />
+      </Routes>
     </div>
-  )
+  );
 }
