@@ -16,6 +16,7 @@ export default {
         display: ['"Bebas Neue"', 'cursive'],
         serif:   ['"Cormorant Garamond"', 'serif'],
         body:    ['"DM Sans"', 'sans-serif'],
+        ycp:     ['Archivo', 'system-ui', 'sans-serif'],
       },
       keyframes: {
         fadeUp: {
