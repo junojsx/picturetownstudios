@@ -1,5 +1,14 @@
-import { useState } from "react";
-import { Play, ChevronDown, ChevronUp } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import {
+  Play,
+  ChevronDown,
+  ChevronUp,
+  X,
+  ChevronLeft,
+  Clock,
+  Volume2,
+  Maximize,
+} from "lucide-react";
 import Navbar from "../components/Navbar";
 
 const DESCRIPTION_LEAD =
@@ -15,17 +24,350 @@ const HERO_BG =
 const accent = "#FFB800";
 
 const ROLE_TABS = [
-  { id: "camera-editor", label: "Camera Operator / Editor" },
-  { id: "technical-coordinator", label: "Technical Coordinator" },
+  {
+    id: "camera-editor",
+    label: "Camera Operator / Editor",
+    projectTitle: "Morning Bell — Student Short (Spring 2024)",
+    videos: [
+      {
+        youtubeId: "M7lc1UVf-VE",
+        title: "Blocking rehearsal",
+        category: "BTS",
+        year: "2024",
+        duration: "3:24",
+      },
+      {
+        youtubeId: "jfKfPfyJRdk",
+        title: "Rough assembly excerpt",
+        category: "Edit",
+        year: "2024",
+        duration: "Live stream",
+      },
+    ],
+    description: [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus feugiat arcu vel tellus sodales, nec pulvinar odio luctus. Integer posuere ligula at urna faucibus, sit amet dignissim nibh ullamcorper.",
+      "Curabitur euismod, felis non placerat tincidunt, purus lectus tempus massa, vitae volutpat metus lectus id nunc. This panel is placeholder copy for the camera and editing scope on this project.",
+    ],
+  },
+  {
+    id: "technical-coordinator",
+    label: "Technical Coordinator",
+    projectTitle: "District Onboarding — AV & Lab Build-Out",
+    videos: [
+      {
+        youtubeId: "jNQXAC9IVRw",
+        title: "Kit walkthrough",
+        category: "Tech",
+        year: "2024",
+        duration: "0:19",
+      },
+      {
+        youtubeId: "M7lc1UVf-VE",
+        title: "Room calibration notes",
+        category: "Lab",
+        year: "2024",
+        duration: "2:10",
+      },
+      {
+        youtubeId: "jfKfPfyJRdk",
+        title: "Mentor tech briefing",
+        category: "Training",
+        year: "2024",
+        duration: "Live",
+      },
+    ],
+    description: [
+      "Pretend documentation for cart builds, lens kits, and ingest stations deployed across partner schools. Morbi blandit mi eu sapien facilisis, at interdum elit pharetra.",
+      "Second paragraph placeholder: scheduling, inventory spreadsheets, and on-call support during first-week shoots—all dummy text until you replace it with real program details.",
+    ],
+  },
   {
     id: "camera-sound-interviewer-editor-a",
     label: "Camera Operator / Sound / Interviewer / Editor",
+    projectTitle: "Voices From the Hall — Mini-Doc Series (Ep. 1–2)",
+    videos: [
+      {
+        youtubeId: "jfKfPfyJRdk",
+        title: "Interview setup (two-camera)",
+        category: "Interview",
+        year: "2024",
+        duration: "Live",
+      },
+      {
+        youtubeId: "M7lc1UVf-VE",
+        title: "Location sound scratch",
+        category: "Sound",
+        year: "2024",
+        duration: "4:02",
+      },
+    ],
+    description: [
+      "Fusce dapibus tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Placeholder summary for run-and-gun interviews, lav + boom, and same-day rough cuts.",
+      "Aenean lacinia bibendum nulla sed consectetur. Replace with credits, festival tags, or partner orgs when ready.",
+    ],
   },
   {
     id: "camera-sound-interviewer-editor-b",
     label: "Camera Operator / Sound / Interviewer / Editor",
+    projectTitle: "Open Mic Friday — Live-to-Tape Highlights",
+    videos: [
+      {
+        youtubeId: "M7lc1UVf-VE",
+        title: "Multicam line cut",
+        category: "Live",
+        year: "2024",
+        duration: "6:15",
+      },
+      {
+        youtubeId: "jNQXAC9IVRw",
+        title: "Crowd ambience pass",
+        category: "Sound",
+        year: "2024",
+        duration: "0:19",
+      },
+      {
+        youtubeId: "jfKfPfyJRdk",
+        title: "Sponsor bumper draft",
+        category: "Deliverable",
+        year: "2024",
+        duration: "Live",
+      },
+    ],
+    description: [
+      "Second slot under the same role label—dummy narrative for a different deliverable. Etiam porta sem malesuada magna mollis euismod.",
+      "Nullam quis risus eget urna mollis ornare vel eu leo. Swap in real dates, runtime, and distribution platforms when you have them.",
+    ],
   },
 ];
+
+function ycpVideoThumb(youtubeId) {
+  return `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
+}
+
+/** Same interaction pattern as `ProjectCard` in Projects.jsx */
+function YcpGalleryCard({ video, onClick }) {
+  const thumb = ycpVideoThumb(video.youtubeId);
+  return (
+    <button
+      type="button"
+      onClick={() => onClick(video)}
+      className="group relative aspect-video w-full overflow-hidden bg-brand-card text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-amber"
+    >
+      <img
+        src={thumb}
+        alt=""
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
+        loading="lazy"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
+      <div className="absolute inset-0 flex items-center justify-center bg-brand-black/55 opacity-0 transition-opacity duration-400 group-hover:opacity-100">
+        <div className="flex h-[72px] w-[72px] scale-90 items-center justify-center rounded-full border-2 border-brand-amber transition-transform duration-300 group-hover:scale-100">
+          <Play size={22} className="ml-1 fill-brand-amber text-brand-amber" />
+        </div>
+      </div>
+      <div className="absolute left-3 top-3">
+        <span className="bg-brand-blue/75 px-2.5 py-1 font-body text-[9px] uppercase tracking-[0.22em] text-white backdrop-blur-sm">
+          {video.category}
+        </span>
+      </div>
+      <div className="absolute right-3 top-3">
+        <span className="font-body text-[10px] text-white/50">{video.year}</span>
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 p-4">
+        <h3 className="translate-y-1 font-display text-2xl leading-none text-white transition-transform duration-300 group-hover:translate-y-0">
+          {video.title}
+        </h3>
+        <p className="mt-1 flex items-center gap-1.5 font-body text-[10px] text-brand-silver/55 opacity-0 transition-opacity delay-75 duration-300 group-hover:opacity-100">
+          <Clock size={9} />
+          {video.duration}
+        </p>
+      </div>
+    </button>
+  );
+}
+
+/** Mirrors `ProjectModal` video column + details layout from Projects.jsx */
+function YcpGalleryVideoModal({ video, onClose }) {
+  const [playing, setPlaying] = useState(false);
+  const posterSrc = ycpVideoThumb(video.youtubeId);
+
+  const handleKey = useCallback(
+    (e) => {
+      if (e.key === "Escape") onClose();
+    },
+    [onClose],
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", handleKey);
+      document.body.style.overflow = "";
+    };
+  }, [handleKey]);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex flex-col bg-brand-black"
+      style={{ animation: "modalIn 0.3s ease both" }}
+    >
+      <div className="flex h-[52px] flex-shrink-0 items-center justify-between border-b border-white/[0.07] px-5 md:px-8">
+        <div className="flex items-center gap-2.5">
+          <div className="flex h-6 w-6 items-center justify-center bg-brand-amber">
+            <span className="select-none font-display text-sm leading-none text-brand-black">
+              PT
+            </span>
+          </div>
+          <span className="hidden font-display text-xs tracking-[0.18em] text-white sm:block">
+            PICTURETOWN
+          </span>
+        </div>
+        <div className="flex items-center gap-4">
+          <button
+            type="button"
+            onClick={onClose}
+            className="flex items-center gap-1.5 font-body text-[10px] uppercase tracking-[0.25em] text-brand-silver/55 transition-colors hover:text-white"
+          >
+            <ChevronLeft size={13} />
+            Back to gallery
+          </button>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className="flex h-8 w-8 items-center justify-center text-brand-silver/50 transition-all hover:bg-white/10 hover:text-white"
+          >
+            <X size={15} />
+          </button>
+        </div>
+      </div>
+
+      <div className="flex flex-1 flex-col overflow-hidden md:flex-row">
+        <div className="flex min-h-[220px] flex-1 flex-col bg-black">
+          {playing ? (
+            <iframe
+              className="h-full w-full flex-1 border-0"
+              src={`https://www.youtube.com/embed/${video.youtubeId}?autoplay=1`}
+              allow="autoplay; fullscreen"
+              allowFullScreen
+              title={video.title}
+            />
+          ) : (
+            <>
+              <div className="relative flex-1">
+                <img
+                  src={posterSrc}
+                  alt=""
+                  className="absolute inset-0 h-full w-full object-cover opacity-60"
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <button
+                    type="button"
+                    onClick={() => setPlaying(true)}
+                    className="group flex h-[76px] w-[76px] items-center justify-center rounded-full border-2 border-brand-amber backdrop-blur-sm transition-all duration-300 hover:bg-brand-amber/15"
+                  >
+                    <Play
+                      size={26}
+                      className="ml-1 fill-brand-amber text-brand-amber"
+                    />
+                  </button>
+                </div>
+                <div className="absolute left-4 top-4">
+                  <span className="bg-brand-blue/70 px-3 py-1.5 font-body text-[9px] uppercase tracking-[0.25em] text-white backdrop-blur-sm">
+                    {video.category} &middot; {video.year}
+                  </span>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 bg-[#080a0c] px-4 py-3">
+                <button
+                  type="button"
+                  onClick={() => setPlaying(true)}
+                  className="text-white/60 transition-colors hover:text-white"
+                >
+                  <Play size={14} />
+                </button>
+                <div className="group/bar relative h-1 flex-1 cursor-pointer rounded-full bg-white/15">
+                  <div className="h-full w-[30%] rounded-full bg-brand-amber" />
+                  <div className="absolute left-[30%] top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-brand-black bg-brand-amber opacity-0 transition-opacity group-hover/bar:opacity-100" />
+                </div>
+                <span className="whitespace-nowrap font-body text-[10px] tabular-nums text-white/65">
+                  {video.duration}
+                </span>
+                <Volume2
+                  size={13}
+                  className="cursor-pointer text-white/40 transition-colors hover:text-white/70"
+                />
+                <Maximize
+                  size={13}
+                  className="cursor-pointer text-white/40 transition-colors hover:text-white/70"
+                />
+              </div>
+            </>
+          )}
+        </div>
+
+        <div className="w-full flex-shrink-0 overflow-y-auto border-t border-white/[0.06] md:w-[360px] md:border-l md:border-t-0 lg:w-[400px] xl:w-[440px]">
+          <div className="space-y-6 p-6 md:p-8">
+            <p className="font-body text-[10px] uppercase tracking-[0.35em] text-brand-amber">
+              {video.category} · {video.year}
+            </p>
+            <div>
+              <h2
+                className="font-display leading-none text-white"
+                style={{ fontSize: "clamp(36px,4vw,52px)" }}
+              >
+                {video.title}
+              </h2>
+              <p className="mt-2 font-body text-xs text-brand-silver/60">
+                Youth Cinema Project · {video.category} · {video.year}
+              </p>
+            </div>
+            <div className="h-px bg-white/[0.07]" />
+            <div>
+              <h4 className="mb-2.5 font-body text-[9px] uppercase tracking-[0.35em] text-brand-silver/55">
+                Overview
+              </h4>
+              <p className="font-body text-sm leading-relaxed text-brand-silver/75">
+                Placeholder overview for this clip—replace with shoot notes, crew,
+                or classroom context. Same layout as the main site project modal.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function RoleTabVideoGallery({ videos }) {
+  const [selected, setSelected] = useState(null);
+
+  return (
+    <>
+      <div className="mt-8">
+        <h4 className="font-ycp mb-4 text-[10px] font-bold uppercase tracking-[0.3em] text-white/50">
+          Video gallery
+        </h4>
+        <div className="grid grid-cols-1 gap-[1px] bg-white/[0.04] md:grid-cols-2 lg:grid-cols-3">
+          {videos.map((v) => (
+            <YcpGalleryCard
+              key={`${v.youtubeId}-${v.title}`}
+              video={v}
+              onClick={setSelected}
+            />
+          ))}
+        </div>
+      </div>
+      {selected && (
+        <YcpGalleryVideoModal
+          video={selected}
+          onClose={() => setSelected(null)}
+        />
+      )}
+    </>
+  );
+}
 
 export default function YouthCinemaProject() {
   const [descriptionExpanded, setDescriptionExpanded] = useState(false);
@@ -202,17 +544,29 @@ export default function YouthCinemaProject() {
                   id={`ycp-panel-${tab.id}`}
                   aria-labelledby={`ycp-tab-${tab.id}`}
                   hidden={activeRoleTab !== index}
-                  className="font-ycp text-sm leading-relaxed text-white/65 md:text-base"
+                  className="font-ycp text-sm leading-relaxed text-white/70 md:text-base"
                 >
-                  <p className="text-white/40">
-                    [Placeholder] Content for <strong className="text-white/80">{tab.label}</strong>{" "}
-                    will go here—project list, credits, gear, dates, or narrative copy.
-                  </p>
-                  <ul className="mt-4 list-disc space-y-2 pl-5 text-white/50">
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                    <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
-                    <li>Ut enim ad minim veniam, quis nostrud exercitation ullamco.</li>
-                  </ul>
+                  <header>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/45">
+                      Project title
+                    </p>
+                    <h3 className="mt-2 text-2xl font-bold uppercase tracking-tight text-white md:text-3xl">
+                      {tab.projectTitle}
+                    </h3>
+                  </header>
+
+                  <RoleTabVideoGallery videos={tab.videos} />
+
+                  <div className="mt-10 border-t border-white/[0.08] pt-8">
+                    <h4 className="mb-4 text-[10px] font-bold uppercase tracking-[0.3em] text-white/50">
+                      Description
+                    </h4>
+                    <div className="space-y-4 text-white/65">
+                      {tab.description.map((paragraph, i) => (
+                        <p key={i}>{paragraph}</p>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
