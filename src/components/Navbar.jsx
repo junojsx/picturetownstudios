@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 
 const navLinks = [
-  { label: 'Work',     hash: 'projects' },
-  { label: 'About',   hash: 'about'    },
+  { label: 'Work', hash: 'projects' },
+  { label: 'About', hash: 'about' },
   { label: 'Services', hash: 'services' },
-  { label: 'Contact', hash: 'contact'  },
+  { label: 'Youth Cinema', path: '/the-youth-cinema-project' },
+  { label: 'Contact', hash: 'contact' },
 ]
 
 export default function Navbar() {
@@ -58,8 +59,10 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-10">
             {navLinks.map(link => (
               <Link
-                key={link.hash}
-                to={{ pathname: '/', hash: link.hash }}
+                key={link.path ?? link.hash}
+                to={
+                  link.path ?? { pathname: '/', hash: link.hash }
+                }
                 className="font-body text-sm tracking-[0.28em] uppercase text-brand-silver/60 hover:text-white transition-colors duration-300"
               >
                 {link.label}
@@ -92,8 +95,10 @@ export default function Navbar() {
           <nav className="flex flex-col gap-8">
             {navLinks.map(link => (
               <Link
-                key={link.hash}
-                to={{ pathname: '/', hash: link.hash }}
+                key={link.path ?? link.hash}
+                to={
+                  link.path ?? { pathname: '/', hash: link.hash }
+                }
                 onClick={close}
                 className="font-display text-5xl text-white hover:text-brand-amber transition-colors leading-none"
               >
