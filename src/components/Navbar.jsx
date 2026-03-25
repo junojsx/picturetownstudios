@@ -60,9 +60,7 @@ export default function Navbar() {
             {navLinks.map(link => (
               <Link
                 key={link.path ?? link.hash}
-                to={
-                  link.path ?? { pathname: '/', hash: link.hash }
-                }
+                to={link.path ?? `/#${link.hash}`}
                 className="font-body text-sm tracking-[0.28em] uppercase text-brand-silver/60 hover:text-white transition-colors duration-300"
               >
                 {link.label}
@@ -73,7 +71,7 @@ export default function Navbar() {
           {/* CTA + hamburger */}
           <div className="flex items-center gap-4">
             <Link
-              to={{ pathname: '/', hash: 'contact' }}
+              to="/#contact"
               className="hidden md:inline-flex font-body text-sm tracking-widest uppercase font-semibold bg-brand-amber hover:bg-amber-500 text-brand-black px-6 py-2.5 transition-all duration-300 hover:scale-105"
             >
               Hire Me
@@ -96,9 +94,7 @@ export default function Navbar() {
             {navLinks.map(link => (
               <Link
                 key={link.path ?? link.hash}
-                to={
-                  link.path ?? { pathname: '/', hash: link.hash }
-                }
+                to={link.path ?? `/#${link.hash}`}
                 onClick={close}
                 className="font-display text-5xl text-white hover:text-brand-amber transition-colors leading-none"
               >
@@ -107,7 +103,7 @@ export default function Navbar() {
             ))}
           </nav>
           <Link
-            to={{ pathname: '/', hash: 'contact' }}
+            to="/#contact"
             onClick={close}
             className="mt-auto font-body text-sm tracking-widest uppercase font-semibold bg-brand-amber text-brand-black px-6 py-4 text-center"
           >

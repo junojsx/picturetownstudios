@@ -15,6 +15,11 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  /* Fixed navbar: hash / in-page links land below the bar */
+  main section[id] {
+    scroll-margin-top: 5.5rem;
+  }
 }
 
 @layer utilities {
