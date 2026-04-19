@@ -4,10 +4,10 @@ import { Menu, X } from 'lucide-react'
 
 const navLinks = [
   { label: 'Work', hash: 'projects' },
-  { label: 'About', hash: 'about' },
   { label: 'Services', hash: 'services' },
-  { label: 'Youth Cinema', path: '/the-youth-cinema-project' },
+  { label: 'About', hash: 'about' },
   { label: 'Contact', hash: 'contact' },
+  { label: 'Youth Cinema', path: '/the-youth-cinema-project' },
 ]
 
 export default function Navbar() {
